@@ -3,12 +3,9 @@ import {Country} from "./scripts";
 export class HTMLLoader {
 
     private readonly tableRows:HTMLDivElement = document.querySelector(".table__rows");
-
-    private rowsDrawnCount = 0;
     private readonly rowsToDrawPerCall:number = 20;
 
     public allDBElements:Country[] = [];
-
     public htmlRows:HTMLDivElement[] = [];
 
     public Initialize(){

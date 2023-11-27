@@ -1,7 +1,5 @@
 ﻿import {index} from "./scripts";
 
-import {Country} from "./scripts";
-
 export class UserInputs{
     private readonly countryNameBtn:HTMLButtonElement = document.querySelector('.js-btn-countryname');
     private readonly capitalNameBtn:HTMLButtonElement = document.querySelector('.js-btn-capitalname');

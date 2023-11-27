@@ -19,36 +19,21 @@ export class DatabaseLoader {
     public async GetCountries_Sorted(keyToSortBy: string) {
         try {
 
-            if(this.lastKeySorted === keyToSortBy)
-            {
-                this.reverseSort = !this.reverseSort;
-            }
-            else{
-                this.reverseSort = false;
-            }
+            this.reverseSort = this.lastKeySorted === keyToSortBy ? !this.reverseSort : false;
 
             this.lastKeySorted = keyToSortBy;
             let apiUrl:string;
 
             if (this.inSearchMode) {
                 apiUrl = this.searchedApiUrl;
-
                 apiUrl += apiUrl.includes('?') ? '&' : '?';
             } else {
                 apiUrl = this.databaseCountriesURL + '?';
             }
 
-
-            if(this.reverseSort)
-            {
-                apiUrl += `_sort=${keyToSortBy}&_order=desc`;
-            }
-            else{
-                apiUrl += `_sort=${keyToSortBy}&_order=asc`;
-            }
+            apiUrl += this.reverseSort ? `_sort=${keyToSortBy}&_order=desc` : `_sort=${keyToSortBy}&_order=asc`;
 
             const response = await axios.get(apiUrl);
-
             return response.data;
 
         } catch (error) {
@@ -80,7 +65,7 @@ export class DatabaseLoader {
             console.error("Could not load countries from database", error);
             throw error;
         }
-    }
 
+    }
 }
 
