@@ -16,7 +16,7 @@ export class DatabaseLoader {
     private reverseSort: boolean = false;
     private lastKeySorted: string;
 
-    public GetCountries_Sorted(keyToSortBy: string): Promise<any> {
+    public GetCountries_Sorted(keyToSortBy: string) {
         this.reverseSort = this.lastKeySorted === keyToSortBy ? !this.reverseSort : false;
         this.lastKeySorted = keyToSortBy;
         let apiUrl: string;
@@ -44,10 +44,10 @@ export class DatabaseLoader {
     public GetCountries_Search(name: string, capital: string, currency: string, language: string): Promise<any> {
         let apiUrl: string = this.databaseCountriesURL + '?';
 
-        if (name) apiUrl += `&name=${name}`;
-        if (capital) apiUrl += `&capital=${capital}`;
-        if (currency) apiUrl += `&currency.name=${currency}`;
-        if (language) apiUrl += `&language.name=${language}`;
+        if (name) apiUrl += `&name_like=${name}`;
+        if (capital) apiUrl += `&capital_like=${capital}`;
+        if (currency) apiUrl += `&currency.name_like=${currency}`;
+        if (language) apiUrl += `&language.name_like=${language}`;
 
         this.searchedApiUrl = apiUrl;
 
